@@ -14,6 +14,16 @@ import com.example.outilpourfairefaceauxcanicules.databinding.ActivityMapsBindin
 
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -56,6 +66,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //GeoJsonLayer layer = new GeoJsonLayer(mMap, R.raw.geojson_file, context);
         //layer.addLayerToMap();
         //Changing something to see if git works.
+
+        List<List<String>> records = new ArrayList<>();
+        try
+        {
+            BufferedReader reader = new BufferedReader((new FileReader("data/Data-arbres.csv")));
+            String line;
+            while ((line = reader.readLine()) != null)
+            {
+                String[] values = line.split(",");
+                records.add(Arrays.asList(values));
+                LatLng arbres = new LatLng(Double.parseDouble(values[8]), Double.parseDouble(values[9]));
+                mMap.addMarker(new MarkerOptions().position(arbres).title("Arbres"));
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
     }
 
 
