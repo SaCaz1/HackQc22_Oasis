@@ -55,6 +55,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //GeoJsonLayer layer = new GeoJsonLayer(mMap, geoJsonData);
         //GeoJsonLayer layer = new GeoJsonLayer(mMap, R.raw.geojson_file, context);
         //layer.addLayerToMap();
+        //Changing something to see if git works.
     }
 
 
