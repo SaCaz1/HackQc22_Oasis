@@ -79,6 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 LatLng arbres = new LatLng(Double.parseDouble(values[8]), Double.parseDouble(values[9]));
                 mMap.addMarker(new MarkerOptions().position(arbres).title("Arbres"));
             }
+            reader.close();
         }
         catch (IOException e)
         {
