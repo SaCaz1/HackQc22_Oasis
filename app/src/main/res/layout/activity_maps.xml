@@ -7,4 +7,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MapsActivity"
-    tools:layout="@layout/activity_maps" />
+    tools:layout="@layout/activity_maps" >
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent">
+
+<CheckBox
+    android:id="@+id/checkbox_arbres"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:onClick="onCheckboxClicked"
+    android:text="arbres" />
+<CheckBox android:id="@+id/checkbox_clim"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="clim"
+    android:onClick="onCheckboxClicked"/>
+<CheckBox android:id="@+id/checkbox_eau"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="eau"
+    android:onClick="onCheckboxClicked"/>
+<CheckBox android:id="@+id/checkbox_parcs"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="parcs"
+    android:onClick="onCheckboxClicked"/>
+<CheckBox android:id="@+id/checkbox_chaleur"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="chaleur"
+    android:onClick="onCheckboxClicked"/>
+</LinearLayout>
+</fragment>
