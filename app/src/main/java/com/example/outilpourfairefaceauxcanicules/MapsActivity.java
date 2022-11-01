@@ -60,17 +60,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(repentigny).title("Marker in Repentigny"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(repentigny,15));
 
-        //Add layer to map  --testing git changes   to see if it works
-        //JSONObject geoJsonData = new JSONObject();// JSONObject containing the GeoJSON data
-        //GeoJsonLayer layer = new GeoJsonLayer(mMap, geoJsonData);
-        //GeoJsonLayer layer = new GeoJsonLayer(mMap, R.raw.geojson_file, context);
-        //layer.addLayerToMap();
-        //Changing something to see if git works.
-
+        //J'ai créé une fonction plus bas qui répète ce code pour pouvoir l'appliquer à tous nos jeux de données.
         List<List<String>> records = new ArrayList<>();
         try
         {
-            BufferedReader reader = new BufferedReader((new FileReader("data/Data-arbres.csv")));
+            BufferedReader reader = new BufferedReader((new FileReader("/data/Data-arbres.csv")));
+
             String line;
             while ((line = reader.readLine()) != null)
             {
@@ -85,7 +80,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         {
             e.printStackTrace();
         }
+        addDataPoint(mMap, "data/Data-arbres.csv", 8, 9, "Arbre", "Les arbres diminuent la temperature de lenvironnement.");
+        //addDataPoint(mMap, "data-clim.csv",13, 12, "Bâtiment climatisé", "Les parcs peuvent procurer une meilleure solution.");
+        //addDataPoint(mMap, "data-parcs.csv", 8, 7, "Parc","Les parcs sont des espaces froids.");
+        //addDataPoint(mMap, "data-mtl-parcs.csv", 22, 21, "Parc", "Info sur les parsc");
+        //addDataPoint(mMap, "data-mtl-piscines.csv", 12, 11, "Piscine", "info sur les piscines");
+        //À ajouter : lieux à éviter, soit les ilôts de chaleur
+    }
 
+    //General function for looping over each dataset and adding it to the map.
+    public void addDataPoint(GoogleMap map, String filename, int lat, int longi, String type, String text) {
+        List<List<String>> records = new ArrayList<>();
+        try {
+            BufferedReader reader = new BufferedReader((new FileReader(filename)));
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.split(",");
+                records.add(Arrays.asList(values));
+                LatLng arbres = new LatLng(Double.parseDouble(values[lat]), Double.parseDouble(values[longi]));
+                mMap.addMarker(new MarkerOptions().position(arbres).title(type).snippet(text));
+                //On pourrait ajouter l'option .icon pour modifier la couleur du marqueur pour cette classe de points
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
