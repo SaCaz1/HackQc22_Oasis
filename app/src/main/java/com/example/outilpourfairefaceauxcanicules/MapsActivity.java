@@ -11,6 +11,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -73,16 +74,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(repentigny).title("Marker in Repentigny"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(repentigny,15));
 
-        arbres = addDataPoint(mMap, "data-arbres.csv", 8, 9, "Arbre", "Les arbres diminuent la temperature de lenvironnement.");
-        clim = addDataPoint(mMap, "lieu-climatise.csv",13, 12, "Bâtiment climatisé", "Les parcs peuvent procurer une meilleure solution.");
-        parcs = addDataPoint(mMap, "parcs.csv", 8, 7, "Parc","Les parcs sont des espaces froids.");
-        //addDataPoint(mMap, "data-mtl-parcs.csv", 22, 21, "Parc", "Info sur les parsc");
-        //addDataPoint(mMap, "data-mtl-piscines.csv", 12, 11, "Piscine", "info sur les piscines");
-        //À ajouter : lieux à éviter, soit les ilôts de chaleur
+        arbres = addDataPoint(mMap, "data-arbres.csv", 8, 9, "Arbre", "Les arbres diminuent la temperature de lenvironnement.", BitmapDescriptorFactory.HUE_GREEN);
+
+        //Clim et parcs ne s'affichent pas sur la cart quand ils sont cliqués...
+        clim = addDataPoint(mMap, "lieu-climatise.csv",13, 12, "Bâtiment climatisé", "Les parcs peuvent procurer une meilleure solution.", BitmapDescriptorFactory.HUE_VIOLET);
+
+        //À valider si addAll fonctionne pour combiner les données de repentigny et Montréal
+        parcs.addAll(addDataPoint(mMap, "parcs.csv", 8, 7, "Parc","Les parcs sont des espaces froids.", BitmapDescriptorFactory.HUE_ORANGE));
+        parcs.addAll(addDataPoint(mMap, "data-mtl-parcs.csv", 22, 21, "Parc", "Info sur les parsc", BitmapDescriptorFactory.HUE_ORANGE));
+        eau.addAll(addDataPoint(mMap, "data-mtl-piscines.csv", 12, 11, "Piscine", "info sur les piscines",BitmapDescriptorFactory.HUE_BLUE));
+        eau.addAll(addDataPoint(mMap, "data-eau.csv",16,15,"Eau","L'eau rafraîchit.",BitmapDescriptorFactory.HUE_BLUE));
+        //À ajouter : lieux à éviter : les ilôts de chaleur
     }
 
     //General function for looping over each dataset and adding it to the map.
-    public List<Marker> addDataPoint(GoogleMap map, String filename, int lat, int longi, String type, String text) {
+    public List<Marker> addDataPoint(GoogleMap map, String filename, int lat, int longi, String type, String text, float colour) {
         List<List<String>> records = new ArrayList<>();
         AssetManager assetManager = getAssets();
         List<Marker> markers = new ArrayList<>();
@@ -96,11 +102,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 String[] values = line.split(",");
                 records.add(Arrays.asList(values));
                 LatLng coord = new LatLng(Double.parseDouble(values[lat]), Double.parseDouble(values[longi]));
-                Marker marker = mMap.addMarker(new MarkerOptions().position(coord).title(type).snippet(text).visible(false));
+                //Adding the elemtn with visibility = False to be able to switch between visible and not visible.
+                Marker marker = mMap.addMarker(new MarkerOptions().position(coord).title(type).snippet(text).visible(false).icon(BitmapDescriptorFactory.defaultMarker(colour)));
 
                 markers.add(marker);
-
-                //On pourrait ajouter l'option .icon pour modifier la couleur du marqueur pour cette classe de points
             }
             reader.close();
         } catch (IOException e) {
@@ -123,6 +128,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 else
                     for (Marker a : arbres)
                         a.setVisible(false);
+                break;
             case R.id.checkbox_eau:
                 if (checked)
                     for (Marker e : eau)
@@ -130,6 +136,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 else
                     for (Marker e : eau)
                         e.setVisible(false);
+                break;
             case R.id.checkbox_parcs:
                 if (checked)
                     for (Marker p : parcs)
@@ -137,6 +144,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 else
                     for (Marker p : parcs)
                         p.setVisible(false);
+                break;
             case R.id.checkbox_clim:
                 if (checked)
                     for (Marker c : clim)
@@ -144,6 +152,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 else
                     for (Marker c : clim)
                         c.setVisible(false);
+                break;
             case R.id.checkbox_chaleur:
                 //if (checked)
                 break;
