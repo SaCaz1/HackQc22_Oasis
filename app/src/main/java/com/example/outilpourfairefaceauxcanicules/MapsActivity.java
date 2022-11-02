@@ -76,6 +76,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     List <Marker> clim = new ArrayList<>();
     List <Marker> eau = new ArrayList<>();
     List <Marker> parcs = new ArrayList<>();
+    int counter = 0;
     List <Polygon> ilots = new ArrayList<>();
 
     @Override
@@ -90,21 +91,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(repentigny,15));
 
         //Marqueurs d'arbres -- regex being weird here I think
-        arbres.addAll(addDataPoint(mMap, "data-arbres.csv", 8, 9, "Arbre", "Les arbres diminuent la temperature de lenvironnement.", BitmapDescriptorFactory.HUE_GREEN));
-        //arbres.addAll(addDataPoint(mMap, "data-mtl-arbres-publics.csv", 21, 20, "Arbre", "Les arbres diminuent la temperature de lenvironnement.", BitmapDescriptorFactory.HUE_GREEN));
+        arbres.addAll(addDataPoint(mMap, "data-arbres.csv", 8, 9, "Arbre", BitmapDescriptorFactory.HUE_GREEN));
+        arbres.addAll(addDataPoint(mMap, "data-mtl-arbres-publics.csv", 21, 20, "Arbre", BitmapDescriptorFactory.HUE_GREEN));
 
         //Marqueurs de bâtiments climatisés
-        clim.addAll(addDataPoint(mMap, "data-clim.csv",12, 11, "Bâtiment climatisé", "Les parcs peuvent procurer une meilleure solution.", BitmapDescriptorFactory.HUE_VIOLET));
-        //addLayerKLM("data-mtl-clim.txt"); //Not working currently
-
+        clim.addAll(addDataPoint(mMap, "data-clim.csv",12, 11, "Bâtiment climatisé", BitmapDescriptorFactory.HUE_VIOLET));
+        clim.addAll(addDataPoint(mMap, "clim-mtl.csv",1,0,"Bâtiment climatisé",BitmapDescriptorFactory.HUE_VIOLET));
 
         //Marqueurs de parcs
-        parcs.addAll(addDataPoint(mMap, "data-parcs.csv", 7, 6, "Parc","Les parcs sont des espaces froids.", BitmapDescriptorFactory.HUE_ORANGE));
+        parcs.addAll(addDataPoint(mMap, "data-parcs.csv", 7, 6, "Parc", BitmapDescriptorFactory.HUE_ORANGE));
 
         //Marqueurs d'eau
-        eau.addAll(addDataPoint(mMap, "data-mtl-piscines.csv", 11, 10, "Piscine", "info sur les piscines",BitmapDescriptorFactory.HUE_BLUE));
-        eau.addAll(addDataPoint(mMap, "data-eau.csv",15,14,"Eau","L'eau rafraîchit.",BitmapDescriptorFactory.HUE_BLUE));
-        eau.addAll(addDataPoint(mMap, "data-mtl-fontaine-eau.csv",12,11,"Fontaine d'eau","S'hydrater est important.",BitmapDescriptorFactory.HUE_BLUE));
+        eau.addAll(addDataPoint(mMap, "data-mtl-piscines.csv", 11, 10, "Piscine", BitmapDescriptorFactory.HUE_BLUE));
+        eau.addAll(addDataPoint(mMap, "data-eau.csv",15,14,"Eau",BitmapDescriptorFactory.HUE_BLUE));
+        eau.addAll(addDataPoint(mMap, "data-mtl-fontaine-eau.csv",12,11,"Point d'eau", BitmapDescriptorFactory.HUE_BLUE));
 
         //Marqueurs d'ilôts de chaleur à éviter
         ilots.addAll(addPolygonToMap(mMap, "data-ilots-chaleur.csv", 3, 2, "Ilots", "Les ilots de chaleur", BitmapDescriptorFactory.HUE_BLUE));
@@ -112,7 +112,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //General function for looping over each dataset and adding it to the map.
-    public List<Marker> addDataPoint(GoogleMap map, String filename, int lat, int longi, String type, String text, float colour) {
+    public List<Marker> addDataPoint(GoogleMap map, String filename, int lat, int longi, String type, float colour) {
         List<List<String>> records = new ArrayList<>();
         AssetManager assetManager = getAssets();
         List<Marker> markers = new ArrayList<>();
@@ -127,8 +127,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 records.add(Arrays.asList(values));
                 LatLng coord = new LatLng(Double.parseDouble(values[lat]), Double.parseDouble(values[longi]));
                 //Adding the elemtn with visibility = False to be able to switch between visible and not visible.
-                Marker marker = mMap.addMarker(new MarkerOptions().position(coord).title(type).snippet(text).visible(false).icon(BitmapDescriptorFactory.defaultMarker(colour)));
-
+                Marker marker = mMap.addMarker(new MarkerOptions().position(coord).title(type).snippet(infos.get(counter % (infos.size()))).visible(false).icon(BitmapDescriptorFactory.defaultMarker(colour)));
+                counter = counter + 1;
                 markers.add(marker);
             }
             reader.close();
@@ -190,6 +190,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     for (Marker e : eau)
                         e.setVisible(false);
                 break;
+            case R.id.checkbox_clim:
+                if (checked)
+                    for (Marker c : clim)
+                        c.setVisible(true);
+                else
+                    for (Marker c : clim)
+                        c.setVisible(false);
             case R.id.checkbox_parcs:
                 if (checked)
                     for (Marker p : parcs)
@@ -209,6 +216,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    //Liste des informations éducatives à inclure dans l'application.
+    List<String> infos = Arrays.asList("Les arbres sont bons pour diminuer la chaleur",
+            "Les parcs peuvent procurer une meilleure solution.",
+            "info sur les piscines", "s'hyadrater est important.");
 
 
 }
