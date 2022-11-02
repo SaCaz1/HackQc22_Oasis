@@ -76,14 +76,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         arbres = addDataPoint(mMap, "data-arbres.csv", 8, 9, "Arbre", "Les arbres diminuent la temperature de lenvironnement.", BitmapDescriptorFactory.HUE_GREEN);
 
-        //Clim et parcs ne s'affichent pas sur la cart quand ils sont cliqués...
-        clim = addDataPoint(mMap, "lieu-climatise.csv",13, 12, "Bâtiment climatisé", "Les parcs peuvent procurer une meilleure solution.", BitmapDescriptorFactory.HUE_VIOLET);
+        clim = addDataPoint(mMap, "data-clim.csv",12, 11, "Bâtiment climatisé", "Les parcs peuvent procurer une meilleure solution.", BitmapDescriptorFactory.HUE_VIOLET);
 
-        //À valider si addAll fonctionne pour combiner les données de repentigny et Montréal
-        parcs.addAll(addDataPoint(mMap, "parcs.csv", 8, 7, "Parc","Les parcs sont des espaces froids.", BitmapDescriptorFactory.HUE_ORANGE));
-        parcs.addAll(addDataPoint(mMap, "data-mtl-parcs.csv", 22, 21, "Parc", "Info sur les parsc", BitmapDescriptorFactory.HUE_ORANGE));
-        eau.addAll(addDataPoint(mMap, "data-mtl-piscines.csv", 12, 11, "Piscine", "info sur les piscines",BitmapDescriptorFactory.HUE_BLUE));
-        eau.addAll(addDataPoint(mMap, "data-eau.csv",16,15,"Eau","L'eau rafraîchit.",BitmapDescriptorFactory.HUE_BLUE));
+        parcs.addAll(addDataPoint(mMap, "data-parcs.csv", 7, 6, "Parc","Les parcs sont des espaces froids.", BitmapDescriptorFactory.HUE_ORANGE));
+        //À ajouter : Je n'ai pas trouvé les données de montréal pour les parces
+        //parcs.addAll(addDataPoint(mMap, "data-mtl-parcs.csv", 22, 21, "Parc", "Info sur les parsc", BitmapDescriptorFactory.HUE_ORANGE));
+        eau.addAll(addDataPoint(mMap, "data-mtl-piscines.csv", 11, 10, "Piscine", "info sur les piscines",BitmapDescriptorFactory.HUE_BLUE));
+        eau.addAll(addDataPoint(mMap, "data-eau.csv",15,14,"Eau","L'eau rafraîchit.",BitmapDescriptorFactory.HUE_BLUE));
+        eau.addAll(addDataPoint(mMap, "data-mtl-fontaine-eau.csv",12,11,"Fontaine d'eau","S'hydrater est important.",BitmapDescriptorFactory.HUE_BLUE));
         //À ajouter : lieux à éviter : les ilôts de chaleur
     }
 
@@ -99,7 +99,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String line;
             reader.readLine(); //reads first line
             while ((line = reader.readLine()) != null) {
-                String[] values = line.split(",");
+                String[] values = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 records.add(Arrays.asList(values));
                 LatLng coord = new LatLng(Double.parseDouble(values[lat]), Double.parseDouble(values[longi]));
                 //Adding the elemtn with visibility = False to be able to switch between visible and not visible.

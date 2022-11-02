@@ -1,0 +1,67 @@
+IDEQUIPEAU,TYPE,MODELE,MATERIAU,COULEUR,STATUT,PERIODE,HEURES,LOCALISAT,IDPARC,NOMLIEU,IDADRESSE,ADRESSECIV,CODEPOSTAL,LONGITUDE,LATITUDE
+341,Fontaine à boire,,,Gris,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,,Hôtel de ville,12167,"435, boulevard Iberville",J6A 2B6,-73.45126831849042,45.74146036523002
+340,Fontaine à boire,Modèle 3380G,Acier inoxydable,Gris,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,128,Parc Thifault,81545,"25, allée de la Création",J6A 0C2,-73.4495305884888,45.73916926730275
+339,Fontaine à boire,Modèle 3380G,Acier inoxydable,Gris,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,128,Parc Thifault,81545,"25, allée de la Création",J6A 0C2,-73.4494322689523,45.73929059524229
+334,Piscine,,,,,,,,,,,,,-73.47765094784953,45.761757280964524
+333,Fontaine à boire,Modèle 3380G,Acier inoxydable,Gris,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,152,Parc Laforest,17805,"173, rue Lorange",J6A 3H3,-73.47282237327835,45.72271311579581
+193,Fontaine à boire,Modèle 3380G,Acier inoxydable,Gris,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,152,Parc Laforest,17805,"173, rue Lorange",J6A 3H3,-73.47270949978987,45.723065948469596
+192,Jeu d'eau,,,,,,,,152,Parc Laforest,17805,,,-73.47273062723293,45.72300039461172
+94,Douche extérieur,,,,Ouvert,,,,130,Parc Saint-Laurent,22150,"280, rue Notre-Dame",J6A 2R6,-73.45626276164944,45.72700130000969
+93,Fontaine à boire,Modèle 3500,Béton,Gris,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,,Parc Saint-Laurent,22150,"280, rue Notre-Dame",J6A 2R6,-73.45606562972165,45.726147950036314
+92,Douche extérieur,,,,Ouvert,,,,130,Parc Saint-Laurent,22150,"280, rue Notre-Dame",J6A 2R6,-73.45632245513475,45.72698105872825
+91,Douche extérieur,,,,Ouvert,,,,130,Parc Saint-Laurent,22150,"280, rue Notre-Dame",J6A 2R6,-73.45624385512927,45.72699143042932
+90,Douche extérieur,,,,Ouvert,,,,130,Parc Saint-Laurent,22150,,,-73.45695102097686,45.72704606949196
+89,Fontaine à boire,,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,160,Parc Deschamps,36282,"243, rue Lanoue",J6A 1W2,-73.46578618501583,45.726957909259994
+88,Fontaine à boire,,Acier inoxydable,Gris,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,126,Parc Jean-Claude-Crevier,2244,"232, rue Bertrand",J5Z 4L3,-73.47800359992209,45.76105455487906
+87,Fontaine à boire,,Béton,Noir,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,Sur le côté du chalet,192,Parc des Premières-Nations,36230,"1399, boulevard Basile-Routhier",J5Y 4A7,-73.4313135549269,45.784220518110644
+79,Fontaine à boire,,Aluminium,Gris,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,Sur le côté du chalet,126,Parc Jean-Claude-Crevier,2244,"232, rue Bertrand",J5Z 4L3,-73.47810029987598,45.76107020841765
+78,Fontaine à boire,,,,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,Sur le côté du chalet,144,Parc Marie-Soleil-Tougas,23198,"250, rue de la Paix",J5Z,-73.47106592720081,45.76949284949822
+77,Jeu d'eau,,,,Ouvert,,,,144,Parc Marie-Soleil-Tougas,23198,"250, rue de la Paix",,-73.47132578726016,45.76963722911976
+75,Jeu d'eau,,,,Ouvert,,,,132,Parc Frédéric-Coiteux,954,"1201, boulevard Basile-Routhier",J5Y 0L3,-73.43780670264904,45.7785805108675
+71,Piscine,,,,Ouvert,,,,142,Parc de la Paix,2221,"170, rue de Berthier",,-73.44654979630486,45.76287431505599
+70,Jeu d'eau,,,,Ouvert,,,,129,Parc Larochelle,18730,"366, rue Marquis",J6A 6B7,-73.46697468685542,45.741450326520344
+69,Jeu d'eau,,,,Ouvert,,,,139,Parc Rochefort,21506,"1286, rue Notre-Dame",J5Y 3X1,-73.40459126008237,45.778768120299965
+68,Fontaine à boire,,,,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'intérieur du chalet,139,Parc Rochefort,21506,"1286, rue Notre-Dame",J5Y 3X1,-73.40489229034874,45.77870086786559
+67,Jeu d'eau,,,,Ouvert,,,,176,Parc Maurice-Richard,17912,"200, boulevard Louis-Philippe-Picard",J5Y 0A8,-73.40967123474756,45.78916353100163
+66,Fontaine à boire,Modèle 3500,Aluminium,Noir,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,176,Parc Maurice-Richard,13159,"200, boulevard Louis-Philippe-Picard",J5Y 0A8,-73.411568096633,45.78929719106686
+64,Fontaine à boire,,,Noir,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'intérieur du chalet,176,Parc Maurice-Richard,13116,"200, boulevard Louis-Philippe-Picard",J5Y 0A8,-73.41036627337658,45.7891506472944
+57,Jeu d'eau,,,,Ouvert,,,,155,Parc Sanguinet,27153,"130, rue Sanguinet",,-73.43072475568161,45.76718243835291
+54,Piscine,,,,Ouvert,,,,131,Parc Rivest,12482,"685, boulevard Iberville",J6A 2E1,-73.43750887219738,45.75685561850584
+50,Fontaine à boire,Modèle 3500,Aluminium,Noir,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,128,Parc Thifault,80691,"457, rue Robillard",J6A,-73.45087112990561,45.740592689612264
+49,Piscine,,,,Ouvert,,,,128,Parc Thifault,80691,"459, rue Robillard",J6A 0C2,-73.45017099008234,45.74034790791477
+46,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,156,Parc Lajoie,15685,"75, rue Lajoie",J6A,-73.45916983714935,45.738176183325244
+45,Jeu d'eau,,,,Ouvert,,,,156,Parc Lajoie,15685,"75, rue Lajoie",,-73.4589854347344,45.738168885313684
+43,Douche extérieur,,,,Ouvert,,,,130,Parc Saint-Laurent,22150,"280, rue Notre-Dame",J6A 2R6,-73.45630759662733,45.72699706287383
+42,Douche extérieur,,,,Fermé,,,,130,Parc Saint-Laurent,22150,"280, rue Notre-Dame",J6A 2R6,-73.4563434132048,45.72682257170045
+41,Fontaine à boire,,,,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,Sur le côté du chalet,130,Parc Saint-Laurent,22150,"280, rue Notre-Dame",J6A 2R6,-73.4563541649552,45.7267970583886
+36,Jeu d'eau,,,,Ouvert,,,,160,Parc Deschamps,36282,"245, rue Lanoue",J6A 1W2,-73.46586852939257,45.72683811955607
+32,Piscine,,,,Ouvert,,,,146,Parc Lachapelle,28791,"45, rue Valois",,-73.42792786182324,45.76118016050476
+31,Fontaine à boire,Modèle 3380G,Acier inoxydable,Gris,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,,Centre d'art Diane-Dufresne,36111,"11, allée de la Création",J6A 0C2,-73.44845448566282,45.73819814505262
+30,Fontaine à boire,Modèle 3500,Aluminium,Vert,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,160,Parc Deschamps,80820,"243, rue Lanoue",J6A 1W2,-73.46641153732573,45.72689936437145
+29,Fontaine à boire,Modèle 3500,Aluminium,Vert,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,163,Parc Juneau,18719,"3, rue Marquette",J6A,-73.43880653328199,45.74837816910262
+28,Fontaine à boire,Modèle 3177,,,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,174,Parc de l'Île-Lebel,16838,"396, rue Notre-Dame",J6A 2T1,-73.44538205719994,45.736704586289605
+27,Fontaine à boire,Modèle 3500,Aluminium,Vert,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,135,Parc de la Tourterelle,23927,"165, rue Philippe-Goulet",J5Y 3P6,-73.41584542884162,45.78148242601964
+26,Fontaine à boire,Modèle 3177,,,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,149,Parc Montcalm,12408,"580, boulevard Iberville",J6A 6B8,-73.44381293918778,45.74861823103978
+25,Fontaine à boire,Modèle 3177+,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,136,Parc Louis-Fréchette,11073,"50, rue Gravel",J5Y,-73.42474349729747,45.76450615542992
+24,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,129,Parc Larochelle,18730,"366, rue Marquis",J6A 6B7,-73.46669907615914,45.74124963402509
+23,Fontaine à boire,Modèle 3177,,,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,174,Parc de l'Île-Lebel,22224,"396, rue Notre-Dame",J6A 2T1,-73.4485387221371,45.73557362651989
+22,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,158,Parc Delacroix,7921,"925, rue Delacroix",J5Y 3T8,-73.44819099656681,45.77143174070754
+21,Fontaine à boire,,Aluminium,Vert,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,Sur le côté du chalet,153,Parc Chamberland,4918,"610, rue Chamberland",J5Z 1L7,-73.46403480898694,45.76617934690265
+20,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,157,Parc Simard,27972,"64, rue Simard",J6A 3M8,-73.47869400828705,45.726784093559424
+19,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,155,Parc Sanguinet,27153,"130, rue Sanguinet",J5Y,-73.43076120822835,45.76738720459652
+18,Fontaine à boire,Modèle 3500,Aluminium,Vert,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,131,Parc Rivest,12482,"685, boulevard Iberville",J6A 2E1,-73.43740789325535,45.757351939022
+17,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,166,Parc des Pins,10368,"250, rue Gauthier",J6A 4P5,-73.46473195245666,45.74318779910685
+16,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,141,Parc Claudel,925,"1020, boulevard Basile-Routhier",J5Y 3V2,-73.44303056023047,45.77379481155185
+15,Fontaine à boire,,Acier inoxydable,Gris,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,Sur le côté du chalet,137,Parc Catherine-Bousquet,18576,"1350, rue Maria-Callas",J5Y,-73.41937031767087,45.78897259052649
+14,Fontaine à boire,Modèle 3500,Aluminium,Vert,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,133,Parc du Moulin,24895,"1055, rue Rachel",J5Y 3R9,-73.4180264625537,45.77434437805424
+13,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,173,Parc Jean-Baptiste-Meilleur,36204,"777, boulevard Iberville",J5Y 1A2,-73.43659822193368,45.761802432251805
+12,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,134,Parc Champigny,5053,"225, rue Champigny",J6A 3P5,-73.4745844539343,45.72791994282411
+11,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,168,Parc Colbert,6545,"65, rue Colbert",J5Z 5B7,-73.46754181510545,45.77438895823536
+10,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,150,Parc Amédée-Meunier,194,"240, rue Amédée-Meunier",J6A 1H9,-73.47301154655666,45.72972533160839
+9,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,140,Parc Entramis,14270,"655, boulevard de L'Assomption",J6A 6Z5,-73.4615397573646,45.75414130322626
+8,Fontaine à boire,Modèle 3500,Aluminium,Vert,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,142,Parc de la Paix,2221,"170, rue de Berthier",J6A,-73.44637815846583,45.762710651090806
+7,Fontaine à boire,Modèle 3500,Aluminium,Vert,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,138,Parc des Moissons,1757,"935, rue Beauchesne",J5Y 2S1,-73.42916690084914,45.77323415508482
+6,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,130,Parc Saint-Laurent,22150,"280, rue Notre-Dame",J6A 2R6,-73.45715552339921,45.72556582905803
+5,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,167,Parc Le Gardeur,16808,"39, rue Le Gardeur",J6A 3A7,-73.47825376320445,45.71518506047666
+4,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,156,Parc Lajoie,15685,"75, rue Lajoie",J6A,-73.45881927439991,45.73857026513055
+3,Fontaine à boire,Modèle 3177,Béton,Naturel,Ouvert,Fermé mi-octobre à mai,7 h à 23 h,À l'extérieur,151,Parc Langelier,15924,"80, rue Langelier",J6A,-73.44954220763975,45.74582489359036
