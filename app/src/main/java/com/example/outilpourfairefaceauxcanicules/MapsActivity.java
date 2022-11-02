@@ -2,6 +2,7 @@ package com.example.outilpourfairefaceauxcanicules;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.view.View;
@@ -19,9 +20,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.outilpourfairefaceauxcanicules.databinding.ActivityMapsBinding;
 
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParserException;
+
+import com.google.maps.android.data.kml.KmlLayer;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -65,6 +70,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     List <Marker> clim = new ArrayList<>();
     List <Marker> eau = new ArrayList<>();
     List <Marker> parcs = new ArrayList<>();
+    KmlLayer layer;
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -77,17 +83,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(repentigny).title("Marker in Repentigny"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(repentigny,15));
 
-        arbres = addDataPoint(mMap, "data-arbres.csv", 8, 9, "Arbre", "Les arbres diminuent la temperature de lenvironnement.", BitmapDescriptorFactory.HUE_GREEN);
+        //Marqueurs d'arbres -- regex being weird here I think
+        arbres.addAll(addDataPoint(mMap, "data-arbres.csv", 8, 9, "Arbre", "Les arbres diminuent la temperature de lenvironnement.", BitmapDescriptorFactory.HUE_GREEN));
+        //arbres.addAll(addDataPoint(mMap, "data-mtl-arbres-publics.csv", 21, 20, "Arbre", "Les arbres diminuent la temperature de lenvironnement.", BitmapDescriptorFactory.HUE_GREEN));
 
-        clim = addDataPoint(mMap, "data-clim.csv",12, 11, "Bâtiment climatisé", "Les parcs peuvent procurer une meilleure solution.", BitmapDescriptorFactory.HUE_VIOLET);
+        //Marqueurs de bâtiments climatisés
+        clim.addAll(addDataPoint(mMap, "data-clim.csv",12, 11, "Bâtiment climatisé", "Les parcs peuvent procurer une meilleure solution.", BitmapDescriptorFactory.HUE_VIOLET));
+        //addLayerKLM("data-mtl-clim.txt"); //Not working currently
 
+
+        //Marqueurs de parcs
         parcs.addAll(addDataPoint(mMap, "data-parcs.csv", 7, 6, "Parc","Les parcs sont des espaces froids.", BitmapDescriptorFactory.HUE_ORANGE));
-        //À ajouter : Je n'ai pas trouvé les données de montréal pour les parces
-        //parcs.addAll(addDataPoint(mMap, "data-mtl-parcs.csv", 22, 21, "Parc", "Info sur les parsc", BitmapDescriptorFactory.HUE_ORANGE));
+
+        //Marqueurs d'eau
         eau.addAll(addDataPoint(mMap, "data-mtl-piscines.csv", 11, 10, "Piscine", "info sur les piscines",BitmapDescriptorFactory.HUE_BLUE));
         eau.addAll(addDataPoint(mMap, "data-eau.csv",15,14,"Eau","L'eau rafraîchit.",BitmapDescriptorFactory.HUE_BLUE));
         eau.addAll(addDataPoint(mMap, "data-mtl-fontaine-eau.csv",12,11,"Fontaine d'eau","S'hydrater est important.",BitmapDescriptorFactory.HUE_BLUE));
-        //À ajouter : lieux à éviter : les ilôts de chaleur
+
+        //Marqueurs d'ilôts de chaleur à éviter
+
     }
 
     //General function for looping over each dataset and adding it to the map.
@@ -115,6 +129,28 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         }
         return markers;
+    }
+
+    //Add data using KLM data format
+    public void addLayerKLM(String filename){
+        AssetManager assetManager = getAssets();
+
+        try {
+            InputStream inputStream = assetManager.open(filename);
+            //The code goes here,
+            try {
+                //Code does not seem to run this, or runs and gets error
+                //Update global variable layer
+                layer = new KmlLayer(mMap, inputStream, getApplicationContext());
+                layer.addLayerToMap();
+            } catch(XmlPullParserException p){
+                p.printStackTrace();
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -149,17 +185,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         p.setVisible(false);
                 break;
             case R.id.checkbox_clim:
-                if (checked)
+                if (checked) {
+                    layer.addLayerToMap();
                     for (Marker c : clim)
                         c.setVisible(true);
-                else
+                }
+                else {
+                    layer.removeLayerFromMap();
                     for (Marker c : clim)
                         c.setVisible(false);
-                break;
+                }
             case R.id.checkbox_chaleur:
                 //if (checked)
                 break;
-
         }
     }
 
