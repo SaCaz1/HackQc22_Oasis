@@ -85,7 +85,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Marqueurs d'arbres -- regex being weird here I think
         arbres.addAll(addDataPoint(mMap, "data-arbres.csv", 8, 9, "Arbre", "Les arbres diminuent la temperature de lenvironnement.", BitmapDescriptorFactory.HUE_GREEN));
-        //arbres.addAll(addDataPoint(mMap, "data-mtl-arbres-publics.csv", 21, 20, "Arbre", "Les arbres diminuent la temperature de lenvironnement.", BitmapDescriptorFactory.HUE_GREEN));
+        arbres.addAll(addDataPoint(mMap, "data-mtl-arbres-publics.csv", 21, 20, "Arbre", "Les arbres diminuent la temperature de lenvironnement.", BitmapDescriptorFactory.HUE_GREEN));
 
         //Marqueurs de bâtiments climatisés
         clim.addAll(addDataPoint(mMap, "data-clim.csv",12, 11, "Bâtiment climatisé", "Les parcs peuvent procurer une meilleure solution.", BitmapDescriptorFactory.HUE_VIOLET));
