@@ -13,7 +13,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -22,7 +24,6 @@ import com.example.outilpourfairefaceauxcanicules.databinding.ActivityMapsBindin
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParserException;
 
-import com.google.maps.android.data.kml.KmlLayer;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -70,7 +71,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     List <Marker> clim = new ArrayList<>();
     List <Marker> eau = new ArrayList<>();
     List <Marker> parcs = new ArrayList<>();
-    KmlLayer layer;
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -102,6 +102,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //Marqueurs d'ilôts de chaleur à éviter
 
+        LatLng ilotsLatLng = new LatLng(45.753284, -73.440079);
+        GroundOverlayOptions ilotsChaleur = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromAsset("ilots-chaleurs.bmp"))
+                .position(ilotsLatLng, 8600f, 6500f)
+                .transparency(0.5f);
+        mMap.addGroundOverlay(ilotsChaleur);
     }
 
     //General function for looping over each dataset and adding it to the map.
@@ -131,27 +137,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return markers;
     }
 
-    //Add data using KLM data format
-    public void addLayerKLM(String filename){
-        AssetManager assetManager = getAssets();
-
-        try {
-            InputStream inputStream = assetManager.open(filename);
-            //The code goes here,
-            try {
-                //Code does not seem to run this, or runs and gets error
-                //Update global variable layer
-                layer = new KmlLayer(mMap, inputStream, getApplicationContext());
-                layer.addLayerToMap();
-            } catch(XmlPullParserException p){
-                p.printStackTrace();
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
 
     public void onCheckboxClicked(View view) {
@@ -184,17 +169,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     for (Marker p : parcs)
                         p.setVisible(false);
                 break;
-            case R.id.checkbox_clim:
-                if (checked) {
-                    layer.addLayerToMap();
-                    for (Marker c : clim)
-                        c.setVisible(true);
-                }
-                else {
-                    layer.removeLayerFromMap();
-                    for (Marker c : clim)
-                        c.setVisible(false);
-                }
             case R.id.checkbox_chaleur:
                 //if (checked)
                 break;
