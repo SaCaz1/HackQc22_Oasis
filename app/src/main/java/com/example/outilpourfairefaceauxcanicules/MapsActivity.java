@@ -20,6 +20,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.outilpourfairefaceauxcanicules.databinding.ActivityMapsBinding;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParserException;
@@ -40,6 +44,7 @@ import java.util.Scanner;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private static final int COLOR_WHITE_ARGB = 0xffffffff;
     private GoogleMap mMap;
     private ActivityMapsBinding binding;
 
@@ -71,6 +76,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     List <Marker> clim = new ArrayList<>();
     List <Marker> eau = new ArrayList<>();
     List <Marker> parcs = new ArrayList<>();
+    List <Polygon> ilots = new ArrayList<>();
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -101,13 +107,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         eau.addAll(addDataPoint(mMap, "data-mtl-fontaine-eau.csv",12,11,"Fontaine d'eau","S'hydrater est important.",BitmapDescriptorFactory.HUE_BLUE));
 
         //Marqueurs d'ilôts de chaleur à éviter
+        ilots.addAll(addPolygonToMap(mMap, "data-ilots-chaleur.csv", 3, 2, "Ilots", "Les ilots de chaleur", BitmapDescriptorFactory.HUE_BLUE));
 
-        LatLng ilotsLatLng = new LatLng(45.753284, -73.440079);
-        GroundOverlayOptions ilotsChaleur = new GroundOverlayOptions()
-                .image(BitmapDescriptorFactory.fromAsset("ilots-chaleurs.bmp"))
-                .position(ilotsLatLng, 8600f, 6500f)
-                .transparency(0.5f);
-        mMap.addGroundOverlay(ilotsChaleur);
     }
 
     //General function for looping over each dataset and adding it to the map.
@@ -137,6 +138,34 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return markers;
     }
 
+    public List<Polygon> addPolygonToMap(GoogleMap map, String filename, int lat, int longi, String type, String text, float colour) {
+        List<Polygon> polygon = new ArrayList<>();
+        List<LatLng> coordlist = new ArrayList<>();
+        AssetManager assetManager = getAssets();
+        try {
+            InputStream input = assetManager.open(filename);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+            String line;
+            reader.readLine(); //reads first line
+            while ((line = reader.readLine()) != null) {
+                String[] values = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+                LatLng coord = new LatLng(Double.parseDouble(values[lat]), Double.parseDouble(values[longi]));
+                coordlist.add(coord);
+            }
+            reader.close();
+            for (int i = 0; i < coordlist.size(); i++)
+            {
+                Polygon poly = mMap.addPolygon(new PolygonOptions().add(coordlist.get(i)).visible(true));
+                if (i == coordlist.size()-1) {
+                    polygon.add(poly);
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return polygon;
+    }
 
 
     public void onCheckboxClicked(View view) {
@@ -170,7 +199,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         p.setVisible(false);
                 break;
             case R.id.checkbox_chaleur:
-                //if (checked)
+                if (checked)
+                    for (Polygon i : ilots)
+                        i.setVisible(true);
+                else
+                    for (Polygon i : ilots)
+                        i.setVisible(false);
                 break;
         }
     }
