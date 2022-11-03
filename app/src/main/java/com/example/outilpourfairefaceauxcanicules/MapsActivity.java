@@ -4,6 +4,7 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -107,7 +108,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         eau.addAll(addDataPoint(mMap, "data-mtl-fontaine-eau.csv",12,11,"Point d'eau", BitmapDescriptorFactory.HUE_BLUE));
 
         //Marqueurs d'ilôts de chaleur à éviter
-        ilots.addAll(addPolygonToMap(mMap, "data-ilots-chaleur.csv", 3, 2, "Ilots", "Les ilots de chaleur", BitmapDescriptorFactory.HUE_BLUE));
+        ilots.add(addPolygonToMap(mMap, "data-ilots-chaleur-zone-1.csv", 3, 2, "Ilots", "Zone de chaleur", BitmapDescriptorFactory.HUE_BLUE));
+        ilots.add(addPolygonToMap(mMap, "data-ilots-chaleur-zone-2.csv", 3, 2, "Ilots", "Zone de chaleur", BitmapDescriptorFactory.HUE_BLUE));
+        ilots.add(addPolygonToMap(mMap, "data-ilots-chaleur-zone-3.csv", 3, 2, "Ilots", "Zone de chaleur", BitmapDescriptorFactory.HUE_BLUE));
+        ilots.add(addPolygonToMap(mMap, "data-ilots-chaleur-zone-4.csv", 3, 2, "Ilots", "Zone de chaleur", BitmapDescriptorFactory.HUE_BLUE));
+        ilots.add(addPolygonToMap(mMap, "data-ilots-chaleur-zone-5.csv", 3, 2, "Ilots", "Zone de chaleur", BitmapDescriptorFactory.HUE_BLUE));
+        ilots.add(addPolygonToMap(mMap, "data-ilots-chaleur-zone-6.csv", 3, 2, "Ilots", "Zone de chaleur", BitmapDescriptorFactory.HUE_BLUE));
+        ilots.add(addPolygonToMap(mMap, "data-ilots-chaleur-zone-7.csv", 3, 2, "Ilots", "Zone de chaleur", BitmapDescriptorFactory.HUE_BLUE));
 
     }
 
@@ -138,9 +145,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         return markers;
     }
 
-    public List<Polygon> addPolygonToMap(GoogleMap map, String filename, int lat, int longi, String type, String text, float colour) {
-        List<Polygon> polygon = new ArrayList<>();
-        List<LatLng> coordlist = new ArrayList<>();
+    public Polygon addPolygonToMap(GoogleMap map, String filename, int lat, int longi, String type, String text, float colour) {
+        ArrayList<LatLng> points = new ArrayList<>();
         AssetManager assetManager = getAssets();
         try {
             InputStream input = assetManager.open(filename);
@@ -150,21 +156,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             while ((line = reader.readLine()) != null) {
                 String[] values = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
                 LatLng coord = new LatLng(Double.parseDouble(values[lat]), Double.parseDouble(values[longi]));
-                coordlist.add(coord);
+                points.add(coord);
             }
             reader.close();
-            for (int i = 0; i < coordlist.size(); i++)
-            {
-                Polygon poly = mMap.addPolygon(new PolygonOptions().add(coordlist.get(i)).visible(true));
-                if (i == coordlist.size()-1) {
-                    polygon.add(poly);
-                }
-            }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return polygon;
+        return mMap.addPolygon(new PolygonOptions()
+                .addAll(points)
+                .strokeWidth(10)
+                .strokeColor(Color.RED)
+                .fillColor(0x33FF0000)
+                .visible(false));
     }
 
 
