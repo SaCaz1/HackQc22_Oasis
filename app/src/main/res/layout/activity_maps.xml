@@ -9,7 +9,7 @@
     tools:context=".MapsActivity"
     tools:layout="@layout/activity_maps" >
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 android:orientation="vertical"
 android:layout_width="fill_parent"
 android:layout_height="fill_parent">
@@ -17,33 +17,38 @@ android:layout_height="fill_parent">
 <CheckBox android:id="@+id/checkbox_clim"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#146fff"
+    android:background="#d8d8e2"
     android:text="Bâtiments climatisés"
     android:onClick="onCheckboxClicked"/>
 <CheckBox
     android:id="@+id/checkbox_arbres"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#146fff"
+    android:background="#d8d8e2"
     android:onClick="onCheckboxClicked"
-    android:text="Arbres" />
+    android:text="Arbres"
+    android:layout_toRightOf="@+id/checkbox_clim"/>
 <CheckBox android:id="@+id/checkbox_eau"
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="#146fff"
+    android:background="#d8d8e2"
     android:text="Points d'eau"
-    android:onClick="onCheckboxClicked"/>
+    android:onClick="onCheckboxClicked"
+    android:layout_toRightOf="@+id/checkbox_arbres"/>
 <CheckBox android:id="@+id/checkbox_parcs"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#146fff"
+    android:background="#d8d8e2"
     android:text="Parcs"
-    android:onClick="onCheckboxClicked"/>
+    android:onClick="onCheckboxClicked"
+    android:layout_below="@+id/checkbox_clim"/>
 <CheckBox android:id="@+id/checkbox_chaleur"
-    android:layout_width="wrap_content"
+    android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="#146fff"
+    android:background="#d8d8e2"
     android:text="Zone de chaleur"
-    android:onClick="onCheckboxClicked"/>
-</LinearLayout>
+    android:onClick="onCheckboxClicked"
+    android:layout_toRightOf="@+id/checkbox_parcs"
+    android:layout_below="@+id/checkbox_arbres"/>
+</RelativeLayout>
 </fragment>

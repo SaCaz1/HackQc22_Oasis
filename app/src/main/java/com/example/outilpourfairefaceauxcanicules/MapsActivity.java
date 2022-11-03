@@ -5,9 +5,13 @@ import androidx.fragment.app.FragmentActivity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -85,27 +89,57 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         UiSettings settings = mMap.getUiSettings();
         settings.setZoomControlsEnabled(true);
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
+            @Override
+            public View getInfoWindow(Marker arg0) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+
+                Context context = getApplicationContext(); //or getActivity(), YourActivity.this, etc.
+
+                LinearLayout info = new LinearLayout(context);
+                info.setOrientation(LinearLayout.VERTICAL);
+
+                TextView title = new TextView(context);
+                title.setTextColor(Color.BLACK);
+                title.setGravity(Gravity.CENTER);
+                title.setTypeface(null, Typeface.BOLD);
+                title.setText(marker.getTitle());
+
+                TextView snippet = new TextView(context);
+                snippet.setTextColor(Color.GRAY);
+                snippet.setText(marker.getSnippet());
+
+                info.addView(title);
+                info.addView(snippet);
+
+                return info;
+            }
+        });
         // Add a marker in Repentigny and move the camera
         LatLng repentigny = new LatLng(45.753284, -73.440079);
         mMap.addMarker(new MarkerOptions().position(repentigny).title("Marker in Repentigny"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(repentigny,15));
 
         //Marqueurs d'arbres -- regex being weird here I think
-        arbres.addAll(addDataPoint(mMap, "data-arbres.csv", 8, 9, "Arbre", BitmapDescriptorFactory.HUE_GREEN));
-        arbres.addAll(addDataPoint(mMap, "data-mtl-arbres-publics.csv", 21, 20, "Arbre", BitmapDescriptorFactory.HUE_GREEN));
+        arbres.addAll(addDataPoint(mMap, "data-arbres.csv", 8, 9, "Arbre", BitmapDescriptorFactory.HUE_GREEN,"arbre.png", arbre));
+        arbres.addAll(addDataPoint(mMap, "data-mtl-arbres-publics.csv", 21, 20, "Arbre", BitmapDescriptorFactory.HUE_GREEN,"arbre.png", arbre));
 
         //Marqueurs de bâtiments climatisés
-        clim.addAll(addDataPoint(mMap, "data-clim.csv",12, 11, "Bâtiment climatisé", BitmapDescriptorFactory.HUE_VIOLET));
-        clim.addAll(addDataPoint(mMap, "clim-mtl.csv",1,0,"Bâtiment climatisé",BitmapDescriptorFactory.HUE_VIOLET));
+        clim.addAll(addDataPoint(mMap, "data-clim.csv",12, 11, "Bâtiment climatisé", BitmapDescriptorFactory.HUE_VIOLET,"clim.png", coolplace));
+        clim.addAll(addDataPoint(mMap, "clim-mtl.csv",1,0,"Bâtiment climatisé",BitmapDescriptorFactory.HUE_VIOLET,"clim.png", coolplace));
 
         //Marqueurs de parcs
-        parcs.addAll(addDataPoint(mMap, "data-parcs.csv", 7, 6, "Parc", BitmapDescriptorFactory.HUE_ORANGE));
+        parcs.addAll(addDataPoint(mMap, "data-parcs.csv", 7, 6, "Parc", BitmapDescriptorFactory.HUE_ORANGE, "parc.png", parc));
 
         //Marqueurs d'eau
-        eau.addAll(addDataPoint(mMap, "data-mtl-piscines.csv", 11, 10, "Piscine", BitmapDescriptorFactory.HUE_BLUE));
-        eau.addAll(addDataPoint(mMap, "data-eau.csv",15,14,"Eau",BitmapDescriptorFactory.HUE_BLUE));
-        eau.addAll(addDataPoint(mMap, "data-mtl-fontaine-eau.csv",12,11,"Point d'eau", BitmapDescriptorFactory.HUE_BLUE));
+        eau.addAll(addDataPoint(mMap, "data-mtl-piscines.csv", 11, 10, "Piscine", BitmapDescriptorFactory.HUE_BLUE,"piscine.png", piscine));
+        eau.addAll(addDataPoint(mMap, "data-eau.csv",15,14,"Eau",BitmapDescriptorFactory.HUE_BLUE,"eau.png", fontaines));
+        eau.addAll(addDataPoint(mMap, "data-mtl-fontaine-eau.csv",12,11,"Point d'eau", BitmapDescriptorFactory.HUE_BLUE,"eau.png", fontaines));
 
         //Marqueurs d'ilôts de chaleur à éviter
         ilots.add(addPolygonToMap(mMap, "data-ilots-chaleur-zone-1.csv", 3, 2, "Ilots", "Zone de chaleur", BitmapDescriptorFactory.HUE_BLUE));
@@ -119,7 +153,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //General function for looping over each dataset and adding it to the map.
-    public List<Marker> addDataPoint(GoogleMap map, String filename, int lat, int longi, String type, float colour) {
+    public List<Marker> addDataPoint(GoogleMap map, String filename, int lat, int longi, String type, float colour, String icone,List<String> listeInfo) {
         List<List<String>> records = new ArrayList<>();
         AssetManager assetManager = getAssets();
         List<Marker> markers = new ArrayList<>();
@@ -134,7 +168,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 records.add(Arrays.asList(values));
                 LatLng coord = new LatLng(Double.parseDouble(values[lat]), Double.parseDouble(values[longi]));
                 //Adding the elemtn with visibility = False to be able to switch between visible and not visible.
-                Marker marker = mMap.addMarker(new MarkerOptions().position(coord).title(type).snippet(infos.get(counter % (infos.size()))).visible(false).icon(BitmapDescriptorFactory.defaultMarker(colour)));
+                Marker marker = mMap.addMarker(new MarkerOptions().position(coord).title(type).snippet(listeInfo.get(counter % (listeInfo.size()))).visible(false).icon(BitmapDescriptorFactory.fromAsset(icone)));
                 counter = counter + 1;
                 markers.add(marker);
             }
@@ -201,6 +235,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 else
                     for (Marker c : clim)
                         c.setVisible(false);
+                break;
             case R.id.checkbox_parcs:
                 if (checked)
                     for (Marker p : parcs)
@@ -221,9 +256,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     //Liste des informations éducatives à inclure dans l'application.
-    List<String> infos = Arrays.asList("Les arbres sont bons pour diminuer la chaleur",
-            "Les parcs peuvent procurer une meilleure solution.",
-            "info sur les piscines", "s'hyadrater est important.");
+    List<String> piscine = Arrays.asList("Heures d’ouverture : ");
+    List<String> fontaines = Arrays.asList("Buvez de l’eau régulièrement (toutes les 20 minutes), \n sans attendre d’avoir soif.","Chaque minute, 1 million de bouteilles de plastique \n sont achetées à travers le monde.", "Au Québec, 600 millions de bouteilles sont disposées \n dans les sites d’enfouissement chaque année, \n un volume équivalent à 240 piscines olympiques.", "L’eau en bouteille coûte 1 500 fois plus cher que l’eau du robinet.","90% des bouteilles d’eau à usage unique ne sont pas recyclées.");
+    List<String> parc = Arrays.asList("Diminuez l’intensité de vos activités physiques extérieures et pratiquez-les en équipes ou en paire.","Limiter les durées d’exposition en plein soleil entre 12h et 16h.","Portez des vêtements de couleurs pâles, légers, amples et de préférence en coton lors de vos sorties extérieures.", "Portez un chapeau à large bord lors de vos sorties extérieures.", "Un terrain gazonné réduit la température ambiante de 1 à 2°C par rapport à un stationnement.","Le gazon réfléchit 25-30% de la radiation solaire contre 5-10% pour l’asphalte. La portion réfléchie ne réchauffe pas la surface.", "Planifiez vos activités extérieures durant les périodes plus fraîches (avant 11h ou après 18h).");
+    List<String> coolplace = Arrays.asList("Heures d’ouverture : ");
+    List<String> arbre = Arrays.asList("Un arbre mature de 40 ans réduit les besoins en climatisation de 237 kWh.","Les surfaces boisées réfléchissent 10-20% des radiations solaires, limitant ainsi le réchauffement du sol.","En banlieue, la présence d’arbres réduit la température de 2 à 3°C.", "En hiver, la présence d’arbres réduit les besoins en chauffage jusqu’à 25%, surtout dans les endroits venteux.","Planter des feuillus à l’ouest, au sud-ouest et au sud favorise la climatisation naturelle.", "Les arbres climatisent naturellement leur environnement en interceptant et en réfléchissant la radiation solaire.","En transpirant et en respirant, les arbres dégagent des goutellettes d’eau qui réduisent la chaleur environnante.", "L’ombre créée par les arbres réduit la température des bâtiments en réduisant la radiation solaire qui pénètre par les fenêtres.","La présence d’un bosquet d’arbre (couverture de 500 à 5 000 m2) réduit la température ambiante jusqu’à 5°C par rapport à un terrain découvert.","Les espaces boisés climatisent naturellement les villes en favorisant une meilleure ventillation.");
 
 
 }
